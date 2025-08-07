@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --media-brand: #3b82f6;
+  --media-focus: #3b82f6;
+  --color-brand: 59 130 246;
+  --color-accent: 139 92 246;
+
+  /* Default styles for captions */
+  --cue-color: white;
+  --cue-bg-color: rgba(0, 0, 0, 0.7);
+  --cue-font-size: 1.5rem;
+  --cue-font-family: sans-serif;
+  --cue-font-weight: normal;
+  --cue-text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  --cue-top: auto;
+  --cue-bottom: 10%;
+  --cue-transform: none;
+  
+  /* FIX: Enforce the bottom position of the cues.
+    This variable controls the vertical offset from the bottom of the player.
+  */
+  --media-cue-bottom: 2%; 
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Enhanced cue display with better positioning and styling */
+.media-player[data-view-type="video"] [data-part="cue-display"] {
+  position: absolute;
+  top: var(--cue-top, auto) !important;
+  bottom: var(--cue-bottom, var(--media-cue-bottom)) !important;
+  left: 0;
+  width: 100%;
+  contain: layout style;
+  user-select: none;
+  transform: var(--cue-transform, none);
+}
+
+/* Enhanced cue styling */
+.media-player [data-part="cue"] {
+  color: var(--cue-color) !important;
+  background-color: var(--cue-bg-color) !important;
+  font-size: var(--cue-font-size) !important;
+  font-family: var(--cue-font-family) !important;
+  font-weight: var(--cue-font-weight) !important;
+  text-shadow: var(--cue-text-shadow) !important;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  margin: 0.125rem;
+  display: inline-block;
+}
+
+/* Custom slider styling for the settings menu */
+.slider {
+  background: linear-gradient(to right, rgb(var(--color-brand)) 0%, rgb(var(--color-brand)) var(--value, 50%), rgba(255, 255, 255, 0.2) var(--value, 50%), rgba(255, 255, 255, 0.2) 100%);
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  border: 2px solid rgb(var(--color-brand));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.slider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  border: 2px solid rgb(var(--color-brand));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Enhanced focus indicators for accessibility */
+.focus-enhanced *:focus {
+  outline: 3px solid var(--media-brand) !important;
+  outline-offset: 2px !important;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .motion-reduce\:transition-none {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* High contrast mode enhancements */
+.contrast-125 {
+  filter: contrast(1.25) brightness(1.1);
+}
+
+/* Light theme adjustments */
+.light-theme {
+  --media-brand: #2563eb;
+  --cue-color: #000000;
+  --cue-bg-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Enhanced menu animations */
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutToBottom {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.animate-slide-in {
+  animation: slideInFromBottom 0.2s ease-out;
+}
+
+.animate-slide-out {
+  animation: slideOutToBottom 0.2s ease-in;
+}
+
+/* Custom scrollbar for menu */
+.menu-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menu-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.menu-scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-brand));
+  border-radius: 3px;
+}
+
+.menu-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.8);
+}
+
