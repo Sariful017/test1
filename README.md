@@ -1,4 +1,4 @@
-This is Vidstack react tailwind css with next.js Dynamic video player.
+This is Vidstack react tailwind css and icon using lucide with next.js Dynamic customized video player.
 
 ## Getting Started
 
